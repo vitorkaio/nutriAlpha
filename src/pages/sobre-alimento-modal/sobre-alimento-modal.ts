@@ -30,11 +30,11 @@ export class SobreAlimentoModalPage {
     //console.log(this.navParams.get('nome'));
   }
 
-  closeModal() {
+  public loseModal() {
     this.viewCtrl.dismiss();
   }
 
-  ionViewDidLoad() {
+  public ionViewDidLoad() {
     console.log('ionViewDidLoad SampleModalPage');
   }
 

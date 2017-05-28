@@ -37,18 +37,18 @@ export class HomePage {
   }// Fim do construtor
 
   // Pega todos os dados do banco de dados firebase
-  getFireBaseAlimentos() {
+  public getFireBaseAlimentos() {
     let ref = this.af.database.ref('/dados');
     ref.on("value", ((snapshot) => {
       let dados = snapshot.val();
       dados.forEach((entry) => {
         this.aux.push(this.format.formataEntrada(entry));
-        console.log(entry[1]);
+        //console.log(entry[1]);
       });
-      this.aux.sort(function (a, b) { return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0); });
+      this.aux.sort(function(a, b) { return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0); });
       this.alimentos = this.aux.slice(this.start, 10);
       this.dimissLoadingDefault();
-    }), function (errorObject) {
+    }), function(errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
   }
@@ -66,11 +66,11 @@ export class HomePage {
         });
 
         this.alimentos = this.aux.slice(this.start, 10);
-        
+
     });
   }*/
 
-  doInfinite(infiniteScroll: any) {
+  public doInfinite(infiniteScroll: any) {
     this.start += 10;
     console.log('doInfinite, start is currently ' + this.start);
 
@@ -90,55 +90,55 @@ export class HomePage {
   }
 
   // Abre o item numa tela de modal:
-  sobreAlimentoModalPage(item: Alimento) {
+  public sobreAlimentoModalPage(item: Alimento) {
     let myModal = this.modalCtrl.create(SobreAlimentoModalPage, item);
     myModal.present();
   }
 
   // Cria um loading ao carregar os dados.
-  presentLoadingDefault() {
+  public presentLoadingDefault() {
     this.load = this.loadingCtrl.create({
       content: 'Carregando Alimentos...'
     });
     this.load.present();
   }
 
-  dimissLoadingDefault() {
+  public dimissLoadingDefault() {
     console.log('Fechar load');
     this.load.dismiss();
   }
 
   // ********************************* Pesquisa elementos *********************************
 
-  getButtonText(): string {
+  public getButtonText(): string {
     return `Switch ${this.isOn ? 'Off' : 'On'}`;
   }
-  setState(): void {
+  public setState(): void {
     this.isOn = !this.isOn;
   }
 
-  toggleDetails() {
+  public toggleDetails() {
     this.isOn = !this.isOn;
   }
 
-  filterItems(searchTerm) {
+  public filterItems(searchTerm) {
     return this.aux.filter((item) => {
       return item.nome.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
     });
   }
 
-  ionViewDidLoad() {
+  public ionViewDidLoad() {
 
     this.setFilteredItems();
 
   }
 
-  ionViewWillEnter() {
+  public ionViewWillEnter() {
     console.log('Alguém entrou');
     this.searchTerm = '';
   }
 
-  setFilteredItems() {
+  public setFilteredItems() {
     console.log('Search: ' + this.searchTerm.length);
     if (this.searchTerm.length == 0) {
       console.log('Restaura Lista');
@@ -153,7 +153,7 @@ export class HomePage {
   }
 
   // ************************************ Add alguma coisa
-  adicionarNovoAlimento() {
+  public adicionarNovoAlimento() {
     console.log('Add item');
   }
 

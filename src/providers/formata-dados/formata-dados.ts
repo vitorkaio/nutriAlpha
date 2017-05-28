@@ -14,12 +14,14 @@ export class FormataDadosProvider {
 
   }
 
-  formataEntrada(entry: any[]) {
+  public formataEntrada(entry: any[]) {
     let lista: any;
 
     let formatados: string[] = [];
 
-    for (let contador = 3; contador <= entry.length; contador++) {
+    for (let contador = 2; contador <= entry.length; contador++) {
+
+      console.log('Nome: ' + entry[1] + '\nUmidade: ' + entry[2], '\nCalorias: ' + entry[3]);
 
       let out: string = entry[contador] + '';
       let s = out.indexOf('.');
@@ -36,7 +38,7 @@ export class FormataDadosProvider {
     /*let out: string = entry[3] + '';
     let s = out.indexOf('.');*/
 
-    lista = ({ nome: entry[1], kcal: formatados[0], proteina: formatados[2], colesterol: formatados[4] });
+    lista = ({ nome: entry[1], kcal: formatados[1], proteina: formatados[3], colesterol: formatados[5] });
     return lista;
 
   }
