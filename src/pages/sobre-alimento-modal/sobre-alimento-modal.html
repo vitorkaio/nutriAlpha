@@ -6,18 +6,262 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Sobre Alimento</ion-title>
+  <ion-navbar color='navsbar'>
+
+    <ion-buttons start>
+      <button (click)="editaAlimento()" ion-button icon-only>
+         <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons start>
+      <button (click)="removeAlimento()" ion-button icon-only>
+         <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title class="modalTitulo" end>Info</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
 
-  <h2>Nome: {{ alimento.nome }}</h2>
-  <h4>Kcal: {{ alimento.kcal }}</h4>
-  <h4>Proteína(g): {{ alimento.proteina }}</h4>
-  <h4>Colesterol(mg): {{ alimento.colesterol }}</h4>
+  <ion-card>
+
+    <ion-card-header>
+      <h2>Alimento: {{ alimento.nome }}</h2>
+    </ion-card-header>
+
+    <ion-card-content>
+      <!-- Add card content here! -->
+    </ion-card-content>
+
+  </ion-card>
+
+
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas">Propridade</ion-col>
+      <ion-col class="colunas">Valor</ion-col>
+      <ion-col class="colunas">Medida</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Umidade</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.umidade }} </ion-col>
+      <ion-col class="colunas" width-50>%</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Kcal</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.kcal }} </ion-col>
+      <ion-col class="colunas" width-50>-</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Kj</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.kj }} </ion-col>
+      <ion-col class="colunas" width-50>-</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Proteína</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.proteina }} </ion-col>
+      <ion-col class="colunas" width-50>g</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Lipídeos</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.lipideos }} </ion-col>
+      <ion-col class="colunas" width-50>g</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Colesterol</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.colesterol }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Carboidrato</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.carboidrato }} </ion-col>
+      <ion-col class="colunas" width-50>g</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Fibra</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.fibra }} </ion-col>
+      <ion-col class="colunas" width-50>g</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Cinzas</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.cinzas }} </ion-col>
+      <ion-col class="colunas" width-50>g</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Cálcio</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.calcio }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Magnésio</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.magnesio }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Número</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.numero }} </ion-col>
+      <ion-col class="colunas" width-50>-</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Manganês</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.manganes }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Fósforo</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.fosforo }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Ferro</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.ferro }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Sódio</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.sodio }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Potássio</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.potassio }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Cobre</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.cobre }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Zinco</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.zinco }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Retinol</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.retinol }} </ion-col>
+      <ion-col class="colunas" width-50>mcg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Re</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.re }} </ion-col>
+      <ion-col class="colunas" width-50>mcg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Rae</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.rae }} </ion-col>
+      <ion-col class="colunas" width-50>mcg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Tiamina</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.tiamina }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Riboflavina</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.riboflavina }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Piridoxina</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.piridoxina }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Niacina</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.niacina }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" width-50>Vitamina c</ion-col>
+      <ion-col class="colunas" width-50>{{ alimento.ferro }} </ion-col>
+      <ion-col class="colunas" width-50>mg</ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
-

@@ -24,10 +24,42 @@ export class SobreAlimentoModalPage {
     console.log('Modal: ' + teste);
 
     this.alimento.nome = this.navParams.data.nome;
+
+    this.alimento.umidade = this.navParams.data.umidade
     this.alimento.kcal = this.navParams.data.kcal;
+    this.alimento.kj = this.navParams.data.kj;
     this.alimento.proteina = this.navParams.data.proteina;
+    this.alimento.lipideos = this.navParams.data.lipideos;
+
     this.alimento.colesterol = this.navParams.data.colesterol;
+    this.alimento.carboidrato = this.navParams.data.carboidrato;
+    this.alimento.fibra = this.navParams.data.fibra;
+    this.alimento.cinzas = this.navParams.data.cinzas;
+    this.alimento.calcio = this.navParams.data.calcio;
+
+    this.alimento.magnesio = this.navParams.data.magnesio;
+    this.alimento.numero = this.navParams.data.numero;
+    this.alimento.manganes = this.navParams.data.manganes;
+    this.alimento.fosforo = this.navParams.data.fosforo;
+    this.alimento.ferro = this.navParams.data.ferro;
+
+    this.alimento.sodio = this.navParams.data.sodio;
+    this.alimento.potassio = this.navParams.data.potassio;
+    this.alimento.cobre = this.navParams.data.cobre;
+    this.alimento.zinco = this.navParams.data.zinco;
+    this.alimento.retinol = this.navParams.data.retinol;
+
+    this.alimento.re = this.navParams.data.re;
+    this.alimento.rae = this.navParams.data.rae;
+    this.alimento.tiamina = this.navParams.data.tiamina;
+    this.alimento.riboflavina = this.navParams.data.riboflavina;
+    this.alimento.piridoxina = this.navParams.data.piridoxina
+
+    this.alimento.niacina = this.navParams.data.niacina;
+    this.alimento.vitaminac = this.navParams.data.vitaminac;
+
     //console.log(this.navParams.get('nome'));
+
   }
 
   public loseModal() {
@@ -36,6 +68,14 @@ export class SobreAlimentoModalPage {
 
   public ionViewDidLoad() {
     console.log('ionViewDidLoad SampleModalPage');
+  }
+
+  public removeAlimento(){
+    console.log('Alimento removido');
+  }
+
+  public editaAlimento(){
+    console.log('Alimento editado');
   }
 
 }

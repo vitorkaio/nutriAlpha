@@ -24,6 +24,7 @@ export interface Alimento{
     re?: string;
     rae?: string;
     riboflavina?: string;
+    tiamina?: string;
     piridoxina?: string;
     niacina?: string;
     vitaminac?: string;

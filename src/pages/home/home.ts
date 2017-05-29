@@ -3,7 +3,7 @@ import { FormataDadosProvider } from './../../providers/formata-dados/formata-da
 import { SobreAlimentoModalPage } from './../sobre-alimento-modal/sobre-alimento-modal';
 import { ApiRestAlimentosProvider } from './../../providers/api-rest-alimento/api-rest-alimento';
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, ToastController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -28,7 +28,8 @@ export class HomePage {
   private isOn: boolean = false;
 
   constructor(public navCtrl: NavController, public apiAlimentos: ApiRestAlimentosProvider, public loadingCtrl: LoadingController,
-    public modalCtrl: ModalController, public af: AngularFireDatabase, public format: FormataDadosProvider, ) {
+    public modalCtrl: ModalController, public af: AngularFireDatabase, public format: FormataDadosProvider,
+    public toastCtrl: ToastController ) {
 
     // Mostra o loading
     this.presentLoadingDefault();
@@ -152,9 +153,27 @@ export class HomePage {
     }
   }
 
-  // ************************************ Add alguma coisa
-  public adicionarNovoAlimento() {
-    console.log('Add item');
+  // ************************************ Add alguma coisa numa lista
+  public adicionarAlimento() {
+    console.log('Adicionar alimento');
+    this.presentToast('Adicionar Alimento na lista');
+  }
+
+  // Adciona no banco de dados
+  public adicionarNovoAlimento(){
+    console.log('Adicionar alimento');
+    this.presentToast('Adicionar Alimento no banco');
+  }
+
+
+  //************************************* Toast
+  public presentToast(msg: string) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
   }
 
 }// Fim da classe

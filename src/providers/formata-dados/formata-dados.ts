@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
+import { Alimento } from './../../model/alimento.model';
+
 
 /*
   Generated class for the FormataDadosProvider provider.
@@ -15,14 +17,13 @@ export class FormataDadosProvider {
   }
 
   public formataEntrada(entry: any[]) {
-    let lista: any;
+
+    // = {} cria uma instância do objeto.
+    let alimento: Alimento = {};
 
     let formatados: string[] = [];
 
     for (let contador = 2; contador <= entry.length; contador++) {
-
-      console.log('Nome: ' + entry[1] + '\nUmidade: ' + entry[2], '\nCalorias: ' + entry[3]);
-
       let out: string = entry[contador] + '';
       let s = out.indexOf('.');
       if (s == -1) {
@@ -30,16 +31,47 @@ export class FormataDadosProvider {
         continue;
       }
       else {
-        let d = out.substr(0, s);
+        let d = out.substr(0, s) + out.substr(s, 3);
         formatados.push(d);
       }
     }
 
-    /*let out: string = entry[3] + '';
-    let s = out.indexOf('.');*/
+    alimento.nome = entry[1];
 
-    lista = ({ nome: entry[1], kcal: formatados[1], proteina: formatados[3], colesterol: formatados[5] });
-    return lista;
+    alimento.umidade = formatados[0];
+    alimento.kcal = formatados[1];
+    alimento.kj = formatados[2];
+    alimento.proteina = formatados[3];
+    alimento.lipideos = formatados[4];
+
+    alimento.colesterol = formatados[5];
+    alimento.carboidrato = formatados[6];
+    alimento.fibra = formatados[7];
+    alimento.cinzas = formatados[8];
+    alimento.calcio = formatados[9];
+
+    alimento.magnesio = formatados[10];
+    alimento.numero = formatados[11];
+    alimento.manganes = formatados[12];
+    alimento.fosforo = formatados[13];
+    alimento.ferro = formatados[14];
+
+    alimento.sodio = formatados[15];
+    alimento.potassio = formatados[16];
+    alimento.cobre = formatados[17];
+    alimento.zinco = formatados[18];
+    alimento.retinol = formatados[19];
+
+    alimento.re = formatados[20];
+    alimento.rae = formatados[21];
+    alimento.tiamina = formatados[22];
+    alimento.riboflavina = formatados[23];
+    alimento.piridoxina = formatados[24];
+
+    alimento.niacina = formatados[25];
+    alimento.vitaminac = formatados[26];
+
+    return alimento;
 
   }
 
