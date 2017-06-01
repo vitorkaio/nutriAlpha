@@ -7,6 +7,7 @@ import { NavController, LoadingController, ToastController } from 'ionic-angular
 import { ModalController } from 'ionic-angular';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { FirebaseAcessProvider } from './../../providers/firebase-acess/firebase-acess';
 
 
 @Component({
@@ -22,23 +23,25 @@ export class HomePage {
   private aux: Alimento[] = [];
   private start: number = 0;
   private load: any;
-
   private searchTerm: string = '';
-
   private isOn: boolean = false;
+
+  private fireBase: FirebaseAcessProvider;
+  private dados: any;
 
   constructor(public navCtrl: NavController, public apiAlimentos: ApiRestAlimentosProvider, public loadingCtrl: LoadingController,
     public modalCtrl: ModalController, public af: AngularFireDatabase, public format: FormataDadosProvider,
-    public toastCtrl: ToastController ) {
-
+    public toastCtrl: ToastController, public fire: FirebaseAcessProvider) {
+    this.fireBase = fire;
     // Mostra o loading
     this.presentLoadingDefault();
-    this.getFireBaseAlimentos();
+    //this.getFireBaseAlimentos();
+    this.getAlimentosBanco();
 
   }// Fim do construtor
 
   // Pega todos os dados do banco de dados firebase
-  public getFireBaseAlimentos() {
+  /*public getFireBaseAlimentos() {
     let ref = this.af.database.ref('/dados');
     ref.on("value", ((snapshot) => {
       let dados = snapshot.val();
@@ -51,6 +54,18 @@ export class HomePage {
       this.dimissLoadingDefault();
     }), function(errorObject) {
       console.log("The read failed: " + errorObject.code);
+    });
+  }*/
+
+  public getAlimentosBanco() {
+    this.fireBase.getAllAlimentos().then(data => {
+      this.dados = data;
+      this.dados.forEach((entry) => {
+        this.aux.push(this.format.formataEntrada(entry));
+      });
+      this.aux.sort(function(a, b) { return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0); });
+      this.alimentos = this.aux.slice(this.start, 10);
+      this.dimissLoadingDefault();
     });
   }
 
@@ -160,7 +175,7 @@ export class HomePage {
   }
 
   // Adciona no banco de dados
-  public adicionarNovoAlimento(){
+  public adicionarNovoAlimento() {
     console.log('Adicionar alimento');
     this.presentToast('Adicionar Alimento no banco');
   }

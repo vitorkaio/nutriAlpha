@@ -22,12 +22,6 @@ export class ApiRestAlimentosProvider {
   }
 
   return new Promise(resolve => {
-    /*hheaders.append('Accept', 'application/json');
-        hheaders.append('Content-Type', 'application/json');
-        hheaders.append('Access-Control-Allow-Origin', '*');
-        hheaders.append('Access-Control-Allow-Credentials', 'true');
-        hheaders.append("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
-        hheaders.append("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token");*/
     this.http.get(this.apiUrl)
       .map(res => res.json())
       .subscribe(data => {

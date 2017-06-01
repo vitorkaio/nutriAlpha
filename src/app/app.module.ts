@@ -18,6 +18,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FormataDadosProvider } from '../providers/formata-dados/formata-dados';
+import { FirebaseAcessProvider } from '../providers/firebase-acess/firebase-acess';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDeTEG9fFJ1WU3pZoQD1vi4h7FfN_iIYzU",
@@ -59,6 +60,7 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiRestAlimentosProvider,
     FormataDadosProvider,
+    FirebaseAcessProvider,
   ]
 })
 export class AppModule {}
