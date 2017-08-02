@@ -1,194 +1,213 @@
-import { Alimento } from './../../model/alimento.model';
-import { FormataDadosProvider } from './../../providers/formata-dados/formata-dados';
-import { SobreAlimentoModalPage } from './../sobre-alimento-modal/sobre-alimento-modal';
-import { ApiRestAlimentosProvider } from './../../providers/api-rest-alimento/api-rest-alimento';
+import { AddAlimentoPage } from './../add-alimento/add-alimento';
+import { AcessAlimentosProvider } from './../../providers/acess-alimentos/acess-alimentos';
+import { Alimento } from './../../model/Alimento.model';
 import { Component } from '@angular/core';
-import { NavController, LoadingController, ToastController } from 'ionic-angular';
-import { ModalController } from 'ionic-angular';
-
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { FirebaseAcessProvider } from './../../providers/firebase-acess/firebase-acess';
-
+import { NavController, LoadingController, ToastController, NavParams, Events } from 'ionic-angular';
+import { FormControl } from '@angular/forms';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+    selector: 'page-home',
+    templateUrl: 'home.html'
 })
 export class HomePage {
 
-  //    lista = ({nome: entry[1], kcal: formatados[0], proteina: formatados[2], colesterol: formatados[4]});
+    private alimentos: Alimento[] = [];
+    private listaOperacaoes: Alimento[] = [];
+    private dados: any = [];
 
-  private alimentos: Alimento[] = [];
-  private alimentosTemp: Alimento[] = [];
-  private aux: Alimento[] = [];
-  private start: number = 0;
-  private load: any;
-  private searchTerm: string = '';
-  private isOn: boolean = false;
+    private acesso: AcessAlimentosProvider;
 
-  private fireBase: FirebaseAcessProvider;
-  private dados: any;
+    private isOn: boolean = true;
+    private searchTerm: string = '';
 
-  constructor(public navCtrl: NavController, public apiAlimentos: ApiRestAlimentosProvider, public loadingCtrl: LoadingController,
-    public modalCtrl: ModalController, public af: AngularFireDatabase, public format: FormataDadosProvider,
-    public toastCtrl: ToastController, public fire: FirebaseAcessProvider) {
-    this.fireBase = fire;
-    // Mostra o loading
-    this.presentLoadingDefault();
-    //this.getFireBaseAlimentos();
-    this.getAlimentosBanco();
+    private load: any;
+    private searchControl: FormControl;
+    private searching: any = false;
 
-  }// Fim do construtor
+    constructor(public navCtrl: NavController, public ac: AcessAlimentosProvider, public loadingCtrl: LoadingController,
+    public navParmas: NavParams, public events: Events, public toats: ToastController) {
+        this.acesso = ac;
+        this.presentLoadingDefault();
+        this.getAlimentos();
+        this.searchControl = new FormControl();
+    }
 
-  // Pega todos os dados do banco de dados firebase
-  /*public getFireBaseAlimentos() {
-    let ref = this.af.database.ref('/dados');
-    ref.on("value", ((snapshot) => {
-      let dados = snapshot.val();
-      dados.forEach((entry) => {
-        this.aux.push(this.format.formataEntrada(entry));
-        //console.log(entry[1]);
-      });
-      this.aux.sort(function(a, b) { return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0); });
-      this.alimentos = this.aux.slice(this.start, 10);
-      this.dimissLoadingDefault();
-    }), function(errorObject) {
-      console.log("The read failed: " + errorObject.code);
-    });
-  }*/
 
-  public getAlimentosBanco() {
-    this.fireBase.getAllAlimentos().then(data => {
-      this.dados = data;
-      this.dados.forEach((entry) => {
-        this.aux.push(this.format.formataEntrada(entry));
-      });
-      this.aux.sort(function(a, b) { return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0); });
-      this.alimentos = this.aux.slice(this.start, 10);
-      this.dimissLoadingDefault();
-    });
-  }
-
-  // Pega todos os alimentos do banco.
-  /*getAlimentos() {
-    this.apiAlimentos.getApiAlimentos()
-    .then(data => {
-      let dados = data;
-       dados.forEach((entry)=> {
-         let out: string = entry[3] + '';
-         let s = out.indexOf('.');
-         let kcal: string = out.substr(0, s);
-         this.aux.push({nome: entry[1], kcal: kcal});
+    public ionViewDidLoad() {
+        this.setFilteredItems();
+        this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+            this.searching = false;
+            this.setFilteredItems();
         });
-
-        this.alimentos = this.aux.slice(this.start, 10);
-
-    });
-  }*/
-
-  public doInfinite(infiniteScroll: any) {
-    this.start += 10;
-    console.log('doInfinite, start is currently ' + this.start);
-
-    if (this.start > this.alimentos.length) {
-      this.start = 0;
-      infiniteScroll.complete();
-      return;
     }
 
-    else {
-      setTimeout(() => {
-        this.alimentos = this.alimentos.concat(this.aux.slice(this.start, this.start + 10));
-        infiniteScroll.complete();
-      }, 1000);
+    // Executa depois que o Dom é carregado e antes da página ficar ativa.
+    public ionViewWillEnter() {
+        console.log("Enter page home!");
+        this.searchTerm = '';
+        
+        if(this.isOn == true)
+            this.toggleDetails();
+        
+        // Verifica se a lista de alimentos foi filtrada, se isso acoteceu e a página foi modificada, então
+        // deve ser feita o reset da lista.
+        if( this.alimentos.length != this.dados.length){
+            this.searchTerm = '';
+            this.presentLoadingDefault();
+            this.alimentos = this.dados;
+            this.dimissLoadingDefault();
+        }
     }
 
-  }
-
-  // Abre o item numa tela de modal:
-  public sobreAlimentoModalPage(item: Alimento) {
-    let myModal = this.modalCtrl.create(SobreAlimentoModalPage, item);
-    myModal.present();
-  }
-
-  // Cria um loading ao carregar os dados.
-  public presentLoadingDefault() {
-    this.load = this.loadingCtrl.create({
-      content: 'Carregando Alimentos...'
-    });
-    this.load.present();
-  }
-
-  public dimissLoadingDefault() {
-    console.log('Fechar load');
-    this.load.dismiss();
-  }
-
-  // ********************************* Pesquisa elementos *********************************
-
-  public getButtonText(): string {
-    return `Switch ${this.isOn ? 'Off' : 'On'}`;
-  }
-  public setState(): void {
-    this.isOn = !this.isOn;
-  }
-
-  public toggleDetails() {
-    this.isOn = !this.isOn;
-  }
-
-  public filterItems(searchTerm) {
-    return this.aux.filter((item) => {
-      return item.nome.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-    });
-  }
-
-  public ionViewDidLoad() {
-
-    this.setFilteredItems();
-
-  }
-
-  public ionViewWillEnter() {
-    console.log('Alguém entrou');
-    this.searchTerm = '';
-  }
-
-  public setFilteredItems() {
-    console.log('Search: ' + this.searchTerm.length);
-    if (this.searchTerm.length == 0) {
-      console.log('Restaura Lista');
-      this.start = 0;
-      this.alimentos = this.aux.slice(this.start, 10);
+    // Executa quando a página já carregou
+    //ionViewDidLoad apenas uma vez
+    public ionViewDidEnter(){
+        console.log("Did Enter!");
     }
 
-    else {
-      console.log(this.searchTerm);
-      this.alimentos = this.filterItems(this.searchTerm);
+    public ionViewDidLeave() {
+        console.log('Leave page home!');
+        
     }
-  }
 
-  // ************************************ Add alguma coisa numa lista
-  public adicionarAlimento() {
-    console.log('Adicionar alimento');
-    this.presentToast('Adicionar Alimento na lista');
-  }
+    /*public ionViewWillLeave() {
+        console.log('Leave page home!');
+        this.searchTerm = '';
+        
+    }*/
 
-  // Adciona no banco de dados
-  public adicionarNovoAlimento() {
-    console.log('Adicionar alimento');
-    this.presentToast('Adicionar Alimento no banco');
-  }
+    // ************************** Cria um loading ao carregar os dados **************************
+    public presentLoadingDefault() {
+        this.load = this.loadingCtrl.create({
+            content: 'Carregando Alimentos...'
+        });
+        this.load.present();
+    }
 
+    public dimissLoadingDefault() {
+        this.load.dismiss();
+    }
 
-  //************************************* Toast
-  public presentToast(msg: string) {
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 3000,
-      position: 'top'
-    });
-    toast.present();
-  }
+    // ************************** ************************************ **************************
 
-}// Fim da classe
+    public getAlimentos() {
+        //
+        this.acesso.getAll().then(data => {
+            let aux: any = [];
+            aux = data;
+
+            aux['dados'].forEach(element => {
+                this.dados.push(this.acesso.formataEntrada(element));
+            });
+
+            this.dados.sort(function (a, b) { return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0); });
+            this.alimentos = this.dados;
+            this.dimissLoadingDefault();
+
+        }).catch(err => {
+            console.log(err);
+        });
+    }
+
+    // Carrega mais alimentos na lista.
+    public loadAlimentos() {
+        return new Promise(resolve => {
+
+            //this.start += this.v;
+            this.alimentos = this.dados;
+            resolve();
+
+        });
+    }
+
+    /*doInfinite(infiniteScroll: any) {
+        console.log('Begin async operation');
+
+        if (this.start > this.dados.length) {
+            console.log('Acabou o doInfinite');
+            infiniteScroll.complete();
+            this.start = 0;
+            return;
+        }
+
+        else {
+            setTimeout(() => {
+                this.loadAlimentos().then(() => {
+                    console.log('Async operation has ended');
+                    infiniteScroll.complete();
+                }).catch(err => {
+                    console.log(err);
+                });
+            }, 1000);
+
+        }
+    }*/
+
+    // ********************************** Add lista de operação **********************************
+    public addListaOperacoes(alimento: Alimento) {
+        let t = this.toats.create({
+            message: 'Alimento adicionado: ' + alimento.nome,
+            duration: 3000
+        });
+        t.present();
+        
+        console.log('Add op!');
+        this.listaOperacaoes.push(alimento);
+        this.events.publish('data:created', this.listaOperacaoes);
+    }
+
+    // Abre a página de adicionar elemento.
+    public adicionarPage(): void {
+        // Abrindo uma nova página e passando um parâmetro.
+        this.navCtrl.push(AddAlimentoPage, {
+            'teste': 'Vih'
+        });
+    }
+
+    // ******************************** Pesquisa ********************************
+    public setState(): void {
+        this.isOn = !this.isOn;
+    }
+
+    public toggleDetails() {
+        console.log('-> ' + this.isOn);
+        this.isOn = !this.isOn;
+    }
+
+    public filterItems(searchTerm) {
+        return this.dados.filter((item) => {
+            return item.nome.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+        });
+    }
+
+     public onSearchInput(){
+        this.searching = true;
+    }
+
+    public setFilteredItems() {
+        //console.log('Search: ' + this.searchTerm.length);
+        if (this.searchTerm.length == 0) {
+            this.alimentos = this.dados;
+        }
+
+        else {
+            //console.log(this.searchTerm);
+            this.alimentos = this.filterItems(this.searchTerm);
+        }
+    }
+
+    // ******************************** ********* ********************************
+
+    public resetLista(){
+        console.log('Reset Lista');
+        this.searchTerm = '';
+        this.presentLoadingDefault();
+        this.alimentos = this.dados;
+        this.listaOperacaoes = new Array();
+        if(this.isOn == true)
+            this.toggleDetails();
+        this.dimissLoadingDefault();
+    }
+
+}// Fim da classe home

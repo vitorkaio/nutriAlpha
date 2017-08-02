@@ -1,63 +1,53 @@
 <ion-header>
-  <ion-navbar color='navsbar'>
-    <ion-title *ngIf="!isOn" class="titulo">Alimentos</ion-title>
-    <ion-searchbar *ngIf="isOn" [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
+  <ion-navbar color='myColor'>
+    <ion-title *ngIf="!isOn" class="titulo" text-center>Alimentos</ion-title>
+    <ion-searchbar *ngIf="isOn" [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()"></ion-searchbar>
     <ion-buttons end>
       <button (click)="toggleDetails()" ion-button icon-only>
         <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button (click)="resetLista()" ion-button icon-only>
+        <ion-icon name="refresh"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list [virtualScroll]="alimentos">
-    <ion-item-sliding *virtualItem="let item">
-      <ion-item>
-        <div (click)="sobreAlimentoModalPage(item)">
 
-          <ion-card color='cards'>
+    <div *ngIf="searching" class="spinner-container" text-center>
+        <ion-spinner></ion-spinner>
+    </div>
+  
 
-            <ion-card-header>
-              <h2 style="text-align: center;">{{ item.nome }}</h2>
-            </ion-card-header>
-
-            <ion-card-content>
-              <ion-grid>
+  <ion-list [virtualScroll]="alimentos" approxItemHeight="50px">
+    <ion-item *virtualItem="let item">
+      <div (click)="addListaOperacoes(item)">
+            <div text-center> <h2 ion-text color="myText">{{ item.nome }}</h2> </div> <br>
+            <ion-grid>
                 <ion-row text-center>
-                  <ion-col class="colunas" width-50>Kcal: {{ item.kcal }}</ion-col>
-                  <ion-col class="colunas" width-50>PT: {{ item.proteina }} </ion-col>
-                  <ion-col class="colunas" width-50>HDL: {{ item.colesterol }}</ion-col>
+                    <ion-col class="colunas" width-50><h6 ion-text color="myText">Colesterol</h6></ion-col>
+                    <ion-col class="colunas" width-50><h6 ion-text color="myText">Proteína</h6></ion-col> 
+                    <ion-col class="colunas" width-50><h6 ion-text color="myText"><strong>Kcal</strong></h6></ion-col>
                 </ion-row>
-              </ion-grid>
-            </ion-card-content>
+                 <ion-row text-center>
+                    <ion-col class="colunas" width-50> <h6 ion-text color="myText">{{ item.colesterol }}</h6> </ion-col>
+                    <ion-col class="colunas" width-50> <h6 ion-text color="myText">{{ item.proteina }}</h6> </ion-col> 
+                    <ion-col class="colunas" width-50><h6 ion-text color="secondary">{{ item.kcal }}</h6></ion-col>
+                </ion-row>
+          </ion-grid>
+      </div>
+    </ion-item>
+    </ion-list>
 
-          </ion-card>
-
-
-        </div>
-      </ion-item>
-      <ion-item-options>
-        <ion-buttons end>
-          <button (click)="adicionarAlimento()" ion-button outline color="secondary">
-          <ion-icon name="add-circle"></ion-icon>
-          Adicionar
-        </button>
-        </ion-buttons>
-
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Carregando Alimentos">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-
-  <ion-fab end bottom>
-    <button ion-fab (click)="adicionarNovoAlimento()" icon-only color="navsbar">
-    <ion-icon name="add"></ion-icon>
-  </button>
+  <!--<ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Carregando Alimentos"></ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+    <ion-fab bottom right>
+    <button ion-fab  color="myColor"><ion-icon name="add"></ion-icon></button>
   </ion-fab>
+
 
 </ion-content>
