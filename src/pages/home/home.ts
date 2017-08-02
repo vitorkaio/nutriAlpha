@@ -156,7 +156,7 @@ export class HomePage {
         
         console.log('Add op!');
         this.listaOperacaoes.push(alimento);
-        this.events.publish('data:created', this.listaOperacaoes);
+        this.events.publish('data:created', alimento);
     }
 
     // Abre um modal com as informações do alimento.

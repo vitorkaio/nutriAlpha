@@ -24,6 +24,9 @@ export class InfoAlimentoPage {
     public ionViewDidLoad() {
         console.log('ionViewDidLoad InfoAlimentoPage');
     }
+     public ionViewWillLeave(){
+        //this.navCtrl.pop();
+    }
 
     public loseModal() {
         console.log('Close modal info');
