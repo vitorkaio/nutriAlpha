@@ -1,3 +1,4 @@
+import { InfoAlimentoPage } from './../pages/info-alimento/info-alimento';
 import { AddAlimentoPage } from './../pages/add-alimento/add-alimento';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,7 +21,8 @@ import { HttpModule } from '@angular/http';
     ContactPage,
     HomePage,
     TabsPage,
-    AddAlimentoPage
+    AddAlimentoPage,
+    InfoAlimentoPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import { HttpModule } from '@angular/http';
     ContactPage,
     HomePage,
     TabsPage,
-    AddAlimentoPage
+    AddAlimentoPage,
+    InfoAlimentoPage
   ],
   providers: [
     StatusBar,

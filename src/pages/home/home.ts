@@ -1,3 +1,4 @@
+import { InfoAlimentoPage } from './../info-alimento/info-alimento';
 import { AddAlimentoPage } from './../add-alimento/add-alimento';
 import { AcessAlimentosProvider } from './../../providers/acess-alimentos/acess-alimentos';
 import { Alimento } from './../../model/Alimento.model';
@@ -5,6 +6,7 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController, ToastController, NavParams, Events } from 'ionic-angular';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
+import { ModalController } from 'ionic-angular';
 
 @Component({
     selector: 'page-home',
@@ -18,7 +20,7 @@ export class HomePage {
 
     private acesso: AcessAlimentosProvider;
 
-    private isOn: boolean = true;
+    private isOn: boolean = false;
     private searchTerm: string = '';
 
     private load: any;
@@ -26,7 +28,7 @@ export class HomePage {
     private searching: any = false;
 
     constructor(public navCtrl: NavController, public ac: AcessAlimentosProvider, public loadingCtrl: LoadingController,
-    public navParmas: NavParams, public events: Events, public toats: ToastController) {
+    public navParmas: NavParams, public events: Events, public toats: ToastController, public modal: ModalController) {
         this.acesso = ac;
         this.presentLoadingDefault();
         this.getAlimentos();
@@ -45,7 +47,7 @@ export class HomePage {
     // Executa depois que o Dom é carregado e antes da página ficar ativa.
     public ionViewWillEnter() {
         console.log("Enter page home!");
-        this.searchTerm = '';
+        /*this.searchTerm = '';
         
         if(this.isOn == true)
             this.toggleDetails();
@@ -57,7 +59,7 @@ export class HomePage {
             this.presentLoadingDefault();
             this.alimentos = this.dados;
             this.dimissLoadingDefault();
-        }
+        }*/
     }
 
     // Executa quando a página já carregou
@@ -155,6 +157,13 @@ export class HomePage {
         console.log('Add op!');
         this.listaOperacaoes.push(alimento);
         this.events.publish('data:created', this.listaOperacaoes);
+    }
+
+    // Abre um modal com as informações do alimento.
+    public infoAlimento(alimento: Alimento){
+        this.navCtrl.push(InfoAlimentoPage, {
+			'infoAlimento': alimento
+		});
     }
 
     // Abre a página de adicionar elemento.
