@@ -1,3 +1,4 @@
+import { Alimento } from './../../model/Alimento.model';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController  } from 'ionic-angular';
 
@@ -15,7 +16,7 @@ import { IonicPage, NavController, NavParams, ViewController  } from 'ionic-angu
 })
 export class InfoAlimentoPage {
 
-    private alimentoNome: string = this.navParams.get('infoAlimento').nome;
+    private alimento: Alimento = this.navParams.get('infoAlimento');
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
     }

@@ -7,12 +7,234 @@
 <ion-header>
 
   <ion-navbar color="myColor">
-    <ion-title>{{ alimentoNome }}</ion-title>
+    <ion-title>{{ alimento.nome }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas">Propridade</ion-col>
+      <ion-col class="colunas">Valor</ion-col>
+      <ion-col class="colunas">Medida</ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class='grids'>
+    <ion-row text-center>
+      <ion-col class="colunas" col-4> <p ion-text color="myText">Kcal</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.kcal }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">-</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Proteína</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.proteina }}</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">g</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Colesterol</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.colesterol }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Umidade</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.umidade }}</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">%</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Kj</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.kj }}</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">-</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Lipídeos</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.lipideos }}</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">g</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Carboidrato</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.carboidrato }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">g</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Fibra</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.fibra }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">g</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Cinzas</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.cinzas }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">g</p></ion-col>
+    </ion-row>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Cálcio</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.calcio }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Magnésio</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.magnesio }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Número</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.numero }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">-</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Manganês</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.manganes }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Fósforo</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.fosforo }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Ferro</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.ferro }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Sódio</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.sodio }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Potássio</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.potassio }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Cobre</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.cobre }}</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Zinco</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.zinco }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Retinol</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.retinol }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mcg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Re</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.re }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mcg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Rae</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.rae }}</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mcg</p></ion-col>
+    </ion-row>
+    
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Tiamina</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.tiamina }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+    
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Riboflavina</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.riboflavina }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Piridoxina</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.piridoxina }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Niacina</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.niacina }}</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><p ion-text color="myText">Vitamina c</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ alimento.vitaminac }}</p> </ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">mg</p></ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
