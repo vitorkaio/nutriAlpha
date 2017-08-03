@@ -1,3 +1,4 @@
+import { CestaAlimentoPage } from './../pages/cesta-alimento/cesta-alimento';
 import { InfoAlimentoPage } from './../pages/info-alimento/info-alimento';
 import { AddAlimentoPage } from './../pages/add-alimento/add-alimento';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -5,7 +6,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -17,12 +17,12 @@ import { HttpModule } from '@angular/http';
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
     ContactPage,
     HomePage,
     TabsPage,
     AddAlimentoPage,
-    InfoAlimentoPage
+    InfoAlimentoPage,
+    CestaAlimentoPage
   ],
   imports: [
     BrowserModule,
@@ -32,12 +32,12 @@ import { HttpModule } from '@angular/http';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
     ContactPage,
     HomePage,
     TabsPage,
     AddAlimentoPage,
-    InfoAlimentoPage
+    InfoAlimentoPage,
+    CestaAlimentoPage
   ],
   providers: [
     StatusBar,

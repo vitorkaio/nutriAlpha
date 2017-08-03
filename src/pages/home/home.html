@@ -8,8 +8,9 @@
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button (click)="resetLista()" ion-button icon-only>
-        <ion-icon name="refresh"></ion-icon>
+      <button (click)="openCestaAlimentos()" ion-button icon-only>
+        <ion-icon name="basket"></ion-icon>
+        <p ion-text>{{ cestaAlimentos.length }}</p>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -25,7 +26,7 @@
   <ion-list [virtualScroll]="alimentos" approxItemHeight="50px">
     <ion-item-sliding *virtualItem="let item">
       <ion-item>
-      <div (click)="addListaOperacoes(item)" (swipe)="infoAlimento(item)">
+      <div (swipe)="addListaOperacoes(item)" (click)="infoAlimento(item)">
             <div text-center> <h2 ion-text color="myText">{{ item.nome }}</h2> </div> <br>
             <ion-grid>
                 <ion-row text-center>
@@ -42,8 +43,8 @@
       </div>
       </ion-item>
       <ion-item-options>
-          <button ion-button outline color="myColor" (click)="infoAlimento(item)">
-          <ion-icon name="information-circle"></ion-icon>Info
+          <button ion-button outline color="myColor" (click)="addListaOperacoes(item)">
+          <ion-icon name="basket"></ion-icon>Cesta
         </button>
 
       </ion-item-options>
@@ -54,7 +55,8 @@
     <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Carregando Alimentos"></ion-infinite-scroll-content>
   </ion-infinite-scroll> -->
     <ion-fab bottom right>
-    <button ion-fab  color="myColor"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab  color="myColor" (click)="resetLista()"><ion-icon name="refresh"></ion-icon>
+    </button>
   </ion-fab>
 
 

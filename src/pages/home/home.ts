@@ -1,9 +1,10 @@
+import { CestaAlimentoPage } from './../cesta-alimento/cesta-alimento';
 import { InfoAlimentoPage } from './../info-alimento/info-alimento';
 import { AddAlimentoPage } from './../add-alimento/add-alimento';
 import { AcessAlimentosProvider } from './../../providers/acess-alimentos/acess-alimentos';
 import { Alimento } from './../../model/Alimento.model';
 import { Component } from '@angular/core';
-import { NavController, LoadingController, ToastController, NavParams, Events } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, NavParams } from 'ionic-angular';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 import { ModalController } from 'ionic-angular';
@@ -15,7 +16,7 @@ import { ModalController } from 'ionic-angular';
 export class HomePage {
 
     private alimentos: Alimento[] = [];
-    private listaOperacaoes: Alimento[] = [];
+    private cestaAlimentos: Alimento[] = [];
     private dados: any = [];
 
     private acesso: AcessAlimentosProvider;
@@ -28,7 +29,7 @@ export class HomePage {
     private searching: any = false;
 
     constructor(public navCtrl: NavController, public ac: AcessAlimentosProvider, public loadingCtrl: LoadingController,
-    public navParmas: NavParams, public events: Events, public toats: ToastController, public modal: ModalController) {
+    public navParmas: NavParams, public toats: ToastController, public modal: ModalController) {
         this.acesso = ac;
         this.presentLoadingDefault();
         this.getAlimentos();
@@ -91,7 +92,7 @@ export class HomePage {
         this.load.dismiss();
     }
 
-    // ************************** ************************************ **************************
+    // ************************** Carrega os dados do arquivo JSON **************************
 
     public getAlimentos() {
         //
@@ -146,7 +147,7 @@ export class HomePage {
         }
     }*/
 
-    // ********************************** Add lista de operação **********************************
+    // ********************************** Adiciona alimento na cesta **********************************
     public addListaOperacoes(alimento: Alimento) {
         let t = this.toats.create({
             message: 'Alimento adicionado: ' + alimento.nome,
@@ -155,8 +156,7 @@ export class HomePage {
         t.present();
         
         console.log('Add op!');
-        this.listaOperacaoes.push(alimento);
-        this.events.publish('data:created', alimento);
+        this.cestaAlimentos.push(alimento);
     }
 
     // Abre um modal com as informações do alimento.
@@ -166,12 +166,31 @@ export class HomePage {
 		});
     }
 
-    // Abre a página de adicionar elemento.
-    public adicionarPage(): void {
-        // Abrindo uma nova página e passando um parâmetro.
-        this.navCtrl.push(AddAlimentoPage, {
-            'teste': 'Vih'
-        });
+    // Abre a página da cesta.
+    public openCestaAlimentos(){
+
+        // Se a cesta estiver vazia não permita abrir a página da cesta.
+        if(this.cestaAlimentos.length == 0){
+            let t = this.toats.create({
+            message: 'A cesta está vazia!',
+            duration: 3000
+            });
+            t.present();
+        }
+
+        else{
+            // Abrindo uma nova página e passando um parâmetro.
+            let out: Alimento[] = this.cestaAlimentos;
+            let sendData = { 'cesta' : out };
+            let modalPage = this.modal.create(CestaAlimentoPage, sendData);
+            modalPage.onDidDismiss(res => {
+                // Se a resposta do modal for true quer dizer que a lista foi resetada.
+                if(res == true){
+                    this.cestaAlimentos = new Array();
+                }
+            });
+            modalPage.present();
+        }
     }
 
     // ******************************** Pesquisa ********************************
@@ -202,7 +221,7 @@ export class HomePage {
 
         else {
             //console.log(this.searchTerm);
-            this.alimentos = this.filterItems(this.searchTerm);
+            this.alimentos = this.filterItems(this.searchTerm.trim());
         }
     }
 
@@ -213,7 +232,7 @@ export class HomePage {
         this.searchTerm = '';
         this.presentLoadingDefault();
         this.alimentos = this.dados;
-        this.listaOperacaoes = new Array();
+        //this.cestaAlimentos = new Array();
         if(this.isOn == true)
             this.toggleDetails();
         this.dimissLoadingDefault();

@@ -1,0 +1,48 @@
+<!--
+  Generated template for the CestaAlimentoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="myColor">
+    <ion-title text-center>Cesta</ion-title>
+    <ion-buttons end>
+      <button (click)="resetaCesta()" ion-button icon-only>
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+    <button ion-item *ngFor="let alimento of cesta" (click)="clicaAlimento(alimento)">
+    {{ alimento.nome }}
+  </button>
+  </ion-list>
+
+  <br> 
+
+  <ion-grid>
+    <ion-row text-center>
+      <ion-col class="colunas" col-4><h5 ion-text color="myText">Propridade</h5></ion-col>
+      <ion-col class="colunas"><h5 ion-text color="myText">Valor</h5></ion-col>
+      <ion-col class="colunas"><h5 ion-text color="myText">Medida</h5></ion-col>
+    </ion-row>
+
+    <div><hr></div>
+    <br> 
+
+    <ion-row text-center>
+      <ion-col class="colunas" col-4> <p ion-text color="myText">Kcal</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">{{ sum.kcal.toFixed(2) }}</p></ion-col>
+      <ion-col class="colunas" col-4><p ion-text color="myText">-</p></ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
