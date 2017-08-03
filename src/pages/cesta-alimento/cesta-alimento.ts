@@ -17,17 +17,19 @@ import { IonicPage, NavController, NavParams, ViewController, AlertController } 
 })
 export class CestaAlimentoPage {
 
-    private cesta: Alimento[] = this.navParams.get('cesta');
-    private quantidade: any;
-    private soma: Alimento;
+    private alimentos: Alimento[] = this.navParams.get('cesta');
+    private basket: any;
     private sum: Soma;
+
+    private qtdPadrao: number = 100;
+    private val: number = 0;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController,
     public alertCtrl: AlertController) {
 
-        this.quantidade = [];
-        for(let i = 0; i < this.cesta.length; i++){
-            this.quantidade.push({'quantidade': 100, alimento: this.cesta[i].nome});
+        this.basket = [];
+        for(let i = 0; i < this.alimentos.length; i++){
+             this.basket.push({'gramas': 100, 'food': this.alimentos[i]});
         }
 
         this.somaCesta();
@@ -43,46 +45,66 @@ export class CestaAlimentoPage {
 
     // Soma as propriedades da cesta
     public somaCesta(){
-        //console.log('Soma!');
         this.sum = {};
         this.sum.kcal = 0;
-        this.cesta.forEach(element => {
-            this.sum.kcal += Number(element.kcal);
-            //console.log(this.sum);
+        this.basket.forEach(element => {
+
+            // Verifica se a quantidade de gramas é a padrão 100.
+            if(element['gramas'] == this.qtdPadrao){
+                console.log(element['food'].kcal);
+                this.sum.kcal += Number(element['food'].kcal);
+            }
+
+            // Se não for faça regra de 3.
+            else{
+                console.log(element['gramas']);
+                let val = (Number(element['food'].kcal) * element['gramas']) / this.qtdPadrao;
+                this.sum.kcal += val;
+            }
+
         });
 
+        //     
     }
 
     // Reseta a cesta de alimentos.
     public resetaCesta(){
-        this.cesta = new Array();
+        this.alimentos = new Array();
+        this.basket = new Array();
         //console.log(this.cesta);
         this.view.dismiss(true);
     }
 
-    public clicaAlimento(alimento: Alimento){
-
-        let gramas: number = 0;
-        for(let i = 0; i < this.quantidade.length; i++){
-            console.log('Food: ' + this.quantidade[i]['alimento']);
-            if (this.quantidade[i]['alimento'] == alimento.nome)
-                gramas = this.quantidade[i]['quantidade'];
-        }
+    public clicaAlimento(alimento: any){
+        console.log(alimento);
+        let gramas: number = alimento['gramas'];
 
         let prompt = this.alertCtrl.create({
-            title: 'Quantidade',
-            message: "Entre com a quantidade em gramas, atual: " + gramas,
+            title: '' + alimento['food'].nome,
+            message: "Entre com a quantidade em gramas, atual: " + gramas + 'g',
             inputs: [
-                {name: 'title', placeholder: 'Title'},
+                {name: 'gramas', placeholder: 'Gramas'},
             ],
             buttons: [
                 {text: 'Cancel', handler: data => {
                         console.log('Cancel clicked');
                     }
                 },
-                {text: 'Save',
+                {text: 'Ok',
                     handler: data => {
-                        console.log('Saved clicked');
+                        this.basket.forEach((element, key) => {
+                            if(element['food'].nome == alimento['food'].nome){
+                                this.val = Number(data['gramas']);
+                                if(isNaN(this.val) == false){
+                                    this.basket[key]['gramas'] = this.val;
+                                    this.somaCesta();
+                                    return;
+                                }
+                                else{
+                                    return;
+                                }
+                            }
+                        });
                     }
                 }
             ]
@@ -92,15 +114,18 @@ export class CestaAlimentoPage {
 
     // Remove um alimento da cesta.
     public removeAlimento(alimento: Alimento){
-        for(let i = 0; i < this.cesta.length; i++){
-            if (this.cesta[i].nome == alimento.nome){
-                this.cesta.splice(i, 1);
-                break;
+
+        this.basket.forEach((element, key) => {
+            if(element['food'].nome == alimento.nome){
+                this.basket.splice(key, 1);
+                this.alimentos.splice(key, 1);
+                return;
             }
-        }
+
+        });
 
         // Verifica se a cesta está vazia.
-        if(this.cesta.length == 0)
+        if(this.basket.length == 0)
             this.resetaCesta();
 
         // Refaz a soma.

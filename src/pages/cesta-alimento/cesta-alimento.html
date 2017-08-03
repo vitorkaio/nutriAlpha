@@ -20,18 +20,18 @@
 
 <ion-content padding>
 
-  <ion-list [virtualScroll]="cesta" approxItemHeight="50px">
+  <ion-list [virtualScroll]="basket" approxItemHeight="50px">
     <ion-item-sliding *virtualItem="let alimento">
       <ion-item (click)="clicaAlimento(alimento)">
       <ion-grid>
         <ion-row>
           <ion-col col-1><h5 ><ion-icon name="basket"></ion-icon></h5></ion-col>
-          <ion-col col-11><h5 ion-text color="myText"> {{ alimento.nome }}</h5></ion-col>
+          <ion-col col-11><h5 ion-text color="myText"> {{ alimento['gramas'] }}g - {{ alimento['food'].nome }}</h5></ion-col>
         </ion-row>
       </ion-grid>
       </ion-item>
     <ion-item-options>
-        <button ion-button outline color="myColor" (click)="removeAlimento(alimento)">
+        <button ion-button outline color="myColor" (click)="removeAlimento(alimento['food'])">
           <ion-icon name="trash" color="danger"></ion-icon>
         </button>
     </ion-item-options>
