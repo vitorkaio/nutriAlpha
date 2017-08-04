@@ -16,7 +16,7 @@ import { ModalController } from 'ionic-angular';
 export class HomePage {
 
     private alimentos: Alimento[] = [];
-    private cestaAlimentos: Alimento[] = [];
+    private cestaAlimentos = new Array();
     private dados: any = [];
 
     private acesso: AcessAlimentosProvider;
@@ -156,7 +156,7 @@ export class HomePage {
         t.present();
         
         console.log('Add op!');
-        this.cestaAlimentos.push(alimento);
+        this.cestaAlimentos.push({'gramas': 100, 'food': alimento});
     }
 
     // Abre um modal com as informações do alimento.
@@ -180,13 +180,16 @@ export class HomePage {
 
         else{
             // Abrindo uma nova página e passando um parâmetro.
-            let out: Alimento[] = this.cestaAlimentos;
+            let out = this.cestaAlimentos;
             let sendData = { 'cesta' : out };
             let modalPage = this.modal.create(CestaAlimentoPage, sendData);
             modalPage.onDidDismiss(res => {
                 // Se a resposta do modal for true quer dizer que a lista foi resetada.
-                if(res == true){
+                if(res == true)
                     this.cestaAlimentos = new Array();
+                else{
+                    console.log(res);
+                    this.cestaAlimentos = res;
                 }
             });
             modalPage.present();
