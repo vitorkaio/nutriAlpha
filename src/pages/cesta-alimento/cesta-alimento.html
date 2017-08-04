@@ -30,17 +30,17 @@
       <ion-item (click)="clicaAlimento(alimento)">
       <ion-grid>
         <ion-row>
-          <ion-col col-1><h5 ion-text color="baseApp"><ion-icon name="basket"></ion-icon></h5></ion-col>
-          <ion-col col-11><h5 ion-text color="myText"> {{ alimento['gramas'] }}g - {{ alimento['food'].nome }}</h5></ion-col>
+          <ion-col col-1><h2 ion-text color="baseApp"><ion-icon name="basket"></ion-icon></h2></ion-col>
+          <ion-col col-11><h2 ion-text color="myText"> {{ alimento['gramas'] }}g - {{ alimento['food'].nome }}</h2></ion-col>
         </ion-row>
       </ion-grid>
       </ion-item>
     <ion-item-options>
         <button ion-button outline color="myColor" (click)="removeAlimento(alimento['food'])">
-          <ion-icon name="trash" color="danger"></ion-icon>
+          <h4><ion-icon name="trash" color="danger"></ion-icon></h4>
         </button>
         <button ion-button outline color="myColor" (click)="resetaAlimento(alimento)">
-          <ion-icon name="refresh" color="primary"></ion-icon>
+          <h4><ion-icon name="refresh" color="primary"></ion-icon></h4>
         </button>
     </ion-item-options>
     </ion-item-sliding>
