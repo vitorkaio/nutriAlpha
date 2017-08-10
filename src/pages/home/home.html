@@ -26,7 +26,7 @@
   <ion-list [virtualScroll]="alimentos" approxItemHeight="50px">
     <ion-item-sliding *virtualItem="let item">
       <ion-item>
-      <div (click)="infoAlimento(item)">
+      <div (click)="addListaOperacoes(item)">
             <div text-center> <h2 ion-text color="myText">{{ item.nome }}</h2> </div> <br>
             <ion-grid>
                 <ion-row text-center>
@@ -43,8 +43,8 @@
       </div>
       </ion-item>
       <ion-item-options>
-          <button ion-button outline color="myColor" (click)="addListaOperacoes(item)">
-          <ion-icon name="basket"></ion-icon>Cesta
+          <button ion-button outline color="myColor" (click)="infoAlimento(item)">
+          <ion-icon name="information-circle"></ion-icon>Info
         </button>
 
       </ion-item-options>

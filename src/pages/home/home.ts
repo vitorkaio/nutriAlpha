@@ -151,7 +151,7 @@ export class HomePage {
     public addListaOperacoes(alimento: Alimento) {
         let t = this.toats.create({
             message: 'Alimento adicionado: ' + alimento.nome,
-            duration: 3000
+            duration: 1500
         });
         t.present();
         
