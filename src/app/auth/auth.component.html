@@ -1,0 +1,45 @@
+<div class="authContent">
+  <div class="auth">
+    <div class="mycard">
+      <div class="myimage" *ngIf='!displayModal'>
+        <img class='imgs' src="assets/img/code.png" width="200" height="200">
+      </div>
+      <div class="myimage load" *ngIf='displayModal'>
+          <div class="header">Verificando senha...</div>
+          <div class="content" [style.text-align]="'center'">
+            <i class="huge notched circle loading icon"></i>
+          </div>
+      </div>
+      <div class="entrada">
+        <div class="ui left icon input fluid labeled">
+          <input [disabled]="displayModal" placeholder="Senha" type="password" #in (keyup)="entrada(in.value)" (keyup.enter)="login()">
+          <i class="unlock alternate icon"></i>
+        </div>
+        <button class="ui green button fluid" [disabled]="senha.length == 0 || displayModal ? true : false "
+        (click)='login()'>Entrar</button>
+        <p>Não tem uma senha?
+          <!--a [routerLink]="['/alimentos']">Contato!</a-->
+          <a>Contato!</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="foot">Contato</div>
+</div>
+
+<sui-modal [isClosable]="true" #modal size='mini' *ngIf='senhaInvalida'>
+  <div class="header">Erro...</div>
+  <div class="content">
+      <p>A senha é inválida</p>
+  </div>
+  <div class="actions">
+      <button class="ui green button" (click)="senhaInvalida = false" autofocus>OK</button>
+  </div>
+</sui-modal>
+
+<sui-modal [isClosable]="false" size='mini' [hidden]="'true'">
+  <div class="header">Verificando senha...</div>
+  <div class="content" [style.text-align]="'center'">
+    <i class="huge notched circle loading icon"></i>
+  </div>
+</sui-modal>

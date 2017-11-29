@@ -1,0 +1,124 @@
+.authContent {
+  display: grid;
+  grid-template-areas: "cont cont " "foo foo";
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 20fr 1fr;
+  height: 100%;
+
+  background-image: url("./../../assets/img/nutri.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.auth {
+  grid-area: cont;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.mycard {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+
+  background-color: rgba(255, 255, 255,.95);
+  border: 1px solid rgba(0, 0, 0,.9);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0,.9);
+
+  width: 350px;
+  height: 350px;
+}
+
+.imgs {
+  height: auto;
+}
+
+.foot {
+  grid-area: foo;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+
+  background-color: rgba(0,0,0,.6);
+  color: white;
+}
+
+/* Classe que define as propriedades do botão e do input */
+.entrada {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.entrada > button {
+  margin-top: 5px;
+}
+
+.entrada > p {
+  margin-top: 15px;
+}
+
+div a {
+  cursor: pointer;
+}
+
+.load {
+  width: 200px;
+  height: 200px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.load > .header {
+  font-size: 20px;
+  margin-bottom: 17px;
+}
+
+.load > .content {
+  color: cornflowerblue;
+}
+
+/* Muda a largura e altura do card quando o tamanho da tela fica menor */
+@media screen and (max-width: 600px) {
+
+  .mycard {
+    width: 250px;
+    height: 350px;
+  }
+
+   /* Configura a imagem para o tamanho adequado quando a largura é menor que 600px */
+  .authContent {
+    background-image: url("/assets/img/nutri3.jpg");
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+
+  }
+
+}
+
+/* Configura a imagem para o tamanho adequado quando a altura é menor que 1000px */
+@media screen and (min-height: 1000px) {
+
+    .mycard {
+      width: 250px;
+      height: 350px;
+    }
+
+    .authContent {
+      background-image: url("/assets/img/nutri.jpg");
+      background-repeat: no-repeat;
+      background-size: auto 100%;
+    }
+
+  }
+
