@@ -1,0 +1,114 @@
+/* Definindo as propriedades da navbar. */
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
+    padding: 15px 0px;
+    background-color: cornflowerblue;
+}
+
+/* Ajustando o tamanho da fonte do span home. */
+.navbar span {
+    font-size: 20px;
+}
+
+/* Definindo a cor 'white' e o tamanho da fonte dos links. */
+.navbar a {
+    color: white;
+    font-size: 17px;
+}
+
+/* Propriedades da div mais a direita. */
+.ops {
+    display: flex;
+    justify-content: space-around;
+    width: 370px;
+
+    margin-left: 15%;
+    
+}
+
+/* Definindo as propriedades da div de contatos. */
+.contact {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Ajusta margens para a div filhas de .contact. */
+.contact div {
+    margin: 0px 10px;
+}
+
+/* Muda a largura e altura do card quando o tamanho da tela fica menor */
+@media screen and (max-width: 800px) {
+    .navbar {
+        justify-content: space-between;
+    }
+
+    .navbar .home {
+        margin-left: 10px;
+    }
+}
+
+/* Propriedades relacionadas a nabbar mobile */
+.navbarMobile {
+    background-color: cornflowerblue;
+    padding: 15px 0px;
+}
+
+.navbarMobile a {
+    color: white;
+    font-size: 17px;
+}
+
+/* Tela do sidebar, propos. */
+.side {
+    background: #f5f5f5;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 20%;
+    min-width: 250px;
+    z-index: 9999;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+/* Define margens para as ops do sidebar. */
+.side .opSide {
+    margin-top: 30px;
+}
+
+.side .opSide div {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.side a {
+    font-size: 18px;
+    color: cornflowerblue;
+}
+
+/* Define as props para o logo. */
+.homeSide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    margin-top: 30px;
+}
+
+
+.menuSam {
+    margin-left: 10px;
+}
+
+.menuSam i {
+    font-size: 17px;
+    color: white;
+}

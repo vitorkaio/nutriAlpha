@@ -1,3 +1,41 @@
-<div class="barra" ></div>
+<nav class='navbar' *ngIf="telaTamanho > 612 ? true : !true">
+    <div class='home'>
+        <a routerLink="/alimentos/lista">
+            <img class="ui middle aligned image mini" src="assets/img/icon/icon_cereal64.png">
+            <span>Home</span>
+        </a>
+    </div>
+    <div class="ops">
+        <div><a routerLink="/alimentos/cesta"><i class="shopping basket icon"></i>Cesta</a></div>
+        <div class="contact">
+            <div><a routerLink="/alimentos/cesta"><i class="shopping mail icon"></i>Contato</a></div>
+            <div><a routerLink="/alimentos/cesta"><i class="shopping sign out icon"></i>Sair</a></div>
+        </div>
+    </div>
+</nav>
+
+<!-- *********** Navbar para telas mobile *********** -->
+
+<nav class='navbarMobile' *ngIf="telaTamanho > 612 ? !true : true">
+    <div class='menuSam'><i class="shopping sidebar icon" (click)="toggleMenu()"></i></div>
+</nav>
+
+<div class="side" [@slideInOut]="this.menuState">
+    <div class="homeSide">
+        <a routerLink="/alimentos/lista" (click)="toggleMenu()">
+            <img class="ui middle aligned image mini" src="assets/img/icon/icon_cereal64.png">
+            <span>Nutri</span>
+        </a>
+    </div>
+    <div class="opSide">
+        <div><a routerLink="/alimentos/cesta"(click)="toggleMenu()"><i class="shopping basket icon"></i>Cesta</a></div>
+        <h4 class="ui horizontal divider">Opções</h4>
+        
+        <div><a routerLink="/alimentos/cesta" (click)="toggleMenu()"><i class="shopping mail icon"></i>Contato</a></div>
+        <div><a routerLink="/alimentos/cesta" (click)="toggleMenu()"><i class="shopping sign out icon"></i>Sair</a></div>
+    </div>
+</div>
+
+<div (window:resize)="onResize($event)"></div>
 
 <router-outlet></router-outlet>

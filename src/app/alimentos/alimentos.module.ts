@@ -8,7 +8,7 @@ import { ListaComponent } from './lista/lista.component';
 @NgModule({
   imports: [
     CommonModule,
-    AlimentosRoutingModule
+    AlimentosRoutingModule,
   ],
   declarations: [AlimentosComponent, CestaComponent, ListaComponent]
 })
