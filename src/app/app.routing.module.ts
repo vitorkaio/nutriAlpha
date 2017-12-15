@@ -6,9 +6,10 @@ import { ModuleWithProviders } from '@angular/core';
 
 const APP_ROUTES: Routes = [
   { path: 'auth', loadChildren: 'app/auth/auth.module#AuthModule' },
-  { path: 'alimentos', loadChildren: 'app/alimentos/alimentos.module#AlimentosModule',
-    canActivate: [AuthGuardService], canLoad: [AuthGuardService]},
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  /*{ path: 'alimentos', loadChildren: 'app/alimentos/alimentos.module#AlimentosModule',
+    canActivate: [AuthGuardService], canLoad: [AuthGuardService]},*/
+  { path: 'alimentos', loadChildren: 'app/alimentos/alimentos.module#AlimentosModule'},
+  { path: '', redirectTo: 'alimentos', pathMatch: 'full' }
   // { path: '**', redirectTo: 'auth'}
 ];
 
