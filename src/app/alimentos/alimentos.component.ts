@@ -9,7 +9,7 @@ import {Component, OnInit, trigger, state, style, transition, animate} from '@an
         transform: 'translate3d(0, 0, 0)'
       })),
       state('out', style({
-        transform: 'translate3d(-100%, 0, 0)'
+        transform: 'translate3d(100%, 0, 0)'
       })),
       transition('in => out', animate('400ms ease-in-out')),
       transition('out => in', animate('400ms ease-in-out'))
@@ -18,8 +18,8 @@ import {Component, OnInit, trigger, state, style, transition, animate} from '@an
 })
 export class AlimentosComponent implements OnInit {
 
-  public telaTamanho: number = window.innerWidth;
-  public menuState:string = 'out';
+  public telaTamanho: number = window.innerWidth; // Largura da tela.
+  public menuState:string = 'out'; // Controla a sidebar.
 
   constructor() { }
 
@@ -32,6 +32,7 @@ export class AlimentosComponent implements OnInit {
     console.log(this.telaTamanho);
   }
 
+  // Abre e fecha a sidebar.
   public toggleMenu() {
     // 1-line if statement that toggles the value:
     this.menuState = this.menuState === 'out' ? 'in' : 'out';

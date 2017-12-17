@@ -2,7 +2,7 @@
     <div class='home'>
         <a routerLink="/alimentos/lista">
             <img class="ui middle aligned image mini" src="assets/img/icon/icon_cereal64.png">
-            <span>Home</span>
+            <span>Nutri</span>
         </a>
     </div>
     <div class="ops">
@@ -18,6 +18,8 @@
 
 <nav class='navbarMobile' *ngIf="telaTamanho > 612 ? !true : true">
     <div class='menuSam'><i class="shopping sidebar icon" (click)="toggleMenu()"></i></div>
+    <div class="logoMobile">NUTRI</div>
+    <div class="outroMobile"style="margin-right: 10px" ></div>
 </nav>
 
 <div class="side" [@slideInOut]="this.menuState">
