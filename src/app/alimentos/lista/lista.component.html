@@ -1,3 +1,5 @@
-<p>
-  lista works!
-</p>
+<ul>
+  <li *ngFor="let item of alimentos">{{ item.nome }}</li>
+</ul>
+
+<div class="erro" *ngIf="erroServidor.length == 0 ? !true : true">{{ erroServidor }}</div>

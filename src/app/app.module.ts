@@ -10,6 +10,8 @@ import { BarraComponent } from './components/barra/barra.component';
 //import { AuthModule } from './auth/auth.module';
 //import { AlimentosModule } from './alimentos/alimentos.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AtlasApiService } from './shared/services/api/atlas-api.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,10 +24,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SuiModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule
     //AlimentosModule,
     //AuthModule
   ],
-  providers: [AuthGuardService, AuthService],
+  providers: [AuthGuardService, AuthService, AtlasApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
