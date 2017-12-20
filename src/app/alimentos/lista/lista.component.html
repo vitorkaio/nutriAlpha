@@ -1,5 +1,28 @@
-<ul>
-  <li *ngFor="let item of alimentos">{{ item.nome }}</li>
-</ul>
+<div class="tudo">
+  <div class="pesquisa">Pesquisa</div>
+  <div class="conteudo">
+        <div *ngFor="let item of alimentos" class="card"><div>{{ item.nome }}</div></div>
+  </div>
+  <div class="foot">
+    <!-- pager --> 
+  <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+      <!--li [ngClass]="{disabled:pager.currentPage === 1}" (click)="setPage(1)">
+          <a>F</a>
+      </li-->
+      <li [ngClass]="{disabled:pager.currentPage === 1}" (click)="setPage(pager.currentPage - 1)">
+          <a><</a>
+      </li>
+      <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" (click)="setPage(page)">
+          <a>{{page}}</a>
+      </li>
+      <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="setPage(pager.currentPage + 1)">
+          <a>></a>
+      </li>
+      <!--li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="setPage(pager.totalPages)">
+          <a>L</a>
+      </li-->
+  </ul>
+  </div>
 
-<div class="erro" *ngIf="erroServidor.length == 0 ? !true : true">{{ erroServidor }}</div>
+  <div class="erro" *ngIf="erroServidor.length == 0 ? !true : true">{{ erroServidor }}</div>
+</div>

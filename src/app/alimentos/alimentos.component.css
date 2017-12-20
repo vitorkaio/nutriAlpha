@@ -1,11 +1,15 @@
 /* Definindo as propriedades da navbar. */
 .navbar {
     display: flex;
+    position: fixed;
     justify-content: space-around;
     align-items: center;
     
     padding: 15px 0px;
     background-color: cornflowerblue;
+
+    top: 0;
+    width: 100%;
 }
 
 /* Ajustando o tamanho da fonte do span home. */
@@ -60,6 +64,10 @@
 
     display: flex;
     justify-content: space-between;
+
+    position: fixed;
+    top: 0;
+    width: 100vw;
 }
 
 .navbarMobile a {

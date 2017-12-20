@@ -1,0 +1,81 @@
+.tudo {
+    display: grid;
+    grid-template-areas: "search" "cont" "foo";
+    grid-template-rows: 1fr 20fr 1fr;
+    height: 100%;
+
+    margin-top: 60px;
+
+    width: 100vw;
+}
+
+/* *********************** Pesquisa props *********************** */
+.pesquisa {
+    grid-area: search;
+    border: 1px solid green;
+
+    margin: 1% 0;
+    width: 100vw;
+}
+
+/* *********************** conteudo props *********************** */
+.conteudo {
+    grid-area: cont;
+    border: 1px solid cornflowerblue;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    width: 100vw;
+}
+
+.card {
+    border: 1px solid red;
+    margin: 2% 5%;
+
+    width: 20%;
+    /*mobile -> width: 80%;*/
+    height: 100px;
+    text-align: center;
+}
+
+/* *********************** Footer props *********************** */
+.foot {
+    grid-area: foo;
+    border: 1px solid black;
+
+    margin: 1% 0;
+    width: 100vw;
+}
+
+.pagination {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pagination li {
+    padding: 10px 15px;
+    margin: 0px 5px;
+    list-style-type: none;
+    cursor: pointer;
+
+    border: 1px solid cornflowerblue;
+    background-color: cornflowerblue;
+
+    width: 45px;
+    text-align: center;
+}
+
+.pagination li a {
+    color: white;
+}
+
+.page-active {
+    background-color: red;
+}
+
+/**************/

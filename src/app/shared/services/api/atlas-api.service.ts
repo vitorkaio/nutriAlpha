@@ -5,8 +5,9 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class AtlasApiService {
 
-  private urlAlimento: string = 'http://localhost:8989/alimento/' 
-  private urlPag: string = 'http://localhost:8989/alimentos'
+  private urlAlimento: string = 'http://192.168.0.32:8989/alimento/' 
+  private urlPag: string = 'http://192.168.0.32:8989/alimentos'
+  //private urlAlimento: string = 'http://localhost:8989/alimento/' 
 
   constructor(private http: HttpClient) { }
 
