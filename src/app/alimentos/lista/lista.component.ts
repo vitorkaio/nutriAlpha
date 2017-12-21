@@ -16,10 +16,13 @@ export class ListaComponent implements OnInit {
   // pager object
   public pager: any = {};
 
-  private pagina: number = -1;
+  public pagina: number = -1;
   
   // paged items
   public pagedItems: any[];
+
+  public campo = 'nome';
+  public options: string[] = ['nome', 'kcal', 'colesterol'];
 
   constructor(private rota: Router, private atlasAPI: AtlasApiService, private pagerService: PagerService) { }
 
@@ -71,6 +74,10 @@ export class ListaComponent implements OnInit {
 
     // get current page of items
     this.pagedItems = this.alimentos.slice(this.pager.startIndex, this.pager.endIndex + 1);
+}
+
+public ordernar(value: string) {
+  console.log(value);
 }
 
  // Faz o logout do sistema.

@@ -16,6 +16,23 @@
 
     margin: 1% 0;
     width: 100vw;
+    height: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px 0px;
+}
+
+.pesquisa > * {
+    margin: 0px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pesquisa > * > * {
+    margin: 0px 6px;
 }
 
 /* *********************** conteudo props *********************** */
@@ -44,12 +61,12 @@
 /* *********************** Footer props *********************** */
 .foot {
     grid-area: foo;
-    border: 1px solid black;
 
     margin: 1% 0;
     width: 100vw;
 }
 
+/* ************* Paginação *****************/
 .pagination {
     display: flex;
     align-items: flex-start;
@@ -63,19 +80,34 @@
     list-style-type: none;
     cursor: pointer;
 
-    border: 1px solid cornflowerblue;
-    background-color: cornflowerblue;
+    border: 1px solid white;
+    background-color: white;
 
     width: 45px;
     text-align: center;
 }
 
-.pagination li a {
-    color: white;
-}
-
-.page-active {
-    background-color: red;
-}
-
 /**************/
+
+@media screen and (max-width: 801px) {
+    .card {
+        width: 80%;
+    }
+
+    .pesquisa {
+        flex-direction: column;
+        height: 130px;
+    }
+
+    .pesquisa > * {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin: 8px 0px;
+    }
+
+    .pesquisa > * > * {
+        margin: 0px 5px;
+    }
+}

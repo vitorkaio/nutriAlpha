@@ -1,5 +1,23 @@
 <div class="tudo">
-  <div class="pesquisa">Pesquisa</div>
+  <div class="pesquisa">
+    <div class="por-nome">
+        <div class="ui icon input">
+            <input type="text" placeholder="Nome alimento...">
+            <i class="inverted circular search link icon"></i>
+        </div>
+    </div>
+    <div class="ordernar">
+        <h4>Ordenar:</h4>
+        <select #campo (change)="ordernar(campo.value)">
+            <option *ngFor="let c of options" [value]="c">{{c}}</option>
+        </select>
+    </div>
+    <div class="sort">
+        <h4>Sort: </h4>
+        <a style="font-size: 17px">ASC<i class="arrow circle up icon"></i></a>
+        <a style="font-size: 17px">DES<i class="arrow circle down icon"></i></a>
+    </div>
+  </div>
   <div class="conteudo">
         <div *ngFor="let item of alimentos" class="card"><div>{{ item.nome }}</div></div>
   </div>
@@ -10,13 +28,13 @@
           <a>F</a>
       </li-->
       <li [ngClass]="{disabled:pager.currentPage === 1}" (click)="setPage(pager.currentPage - 1)">
-          <a><</a>
+          <a style="font-size: 17px"><i class="arrow circle left icon"></i></a>
       </li>
       <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" (click)="setPage(page)">
-          <a>{{page}}</a>
+          <a [ngStyle]="{'color': pager.currentPage === page ? 'black' : 'cornflowerblue'}">{{page}}</a>
       </li>
       <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="setPage(pager.currentPage + 1)">
-          <a>></a>
+          <a style="font-size: 17px"><i class="arrow circle right icon"></i></a>
       </li>
       <!--li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" (click)="setPage(pager.totalPages)">
           <a>L</a>
